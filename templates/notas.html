@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oráculo de las Notas</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="terminal-container">
+        <header>
+            <h1>>_ Oráculo de las Notas</h1>
+        </header>
+        <main class="narrative">
+            <p>
+                Frente a ti se encuentra el Oráculo. Es capaz de predecir tu futuro académico basándose en tus entregas pasadas. 
+                Muchos valientes han llorado al ver sus resultados.
+            </p>
+            <p class="typewriter-text">[El Oráculo duerme. No hay calificaciones que mostrar por ahora...]</p>
+            <div class="action-menu">
+                <a href="{{ url_for('index') }}" class="btn-start">< VOLVER AL INICIO</a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cámara de las Reglas</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="terminal-container">
+        <header>
+            <h1>>_ Cámara de las Reglas</h1>
+        </header>
+        <main class="narrative">
+            <p>
+                Has entrado a la Cámara de las Reglas. Las paredes están grabadas con los mandamientos del desarrollo móvil. 
+                Aquí yace la sabiduría para no reprobar.
+            </p>
+            <p class="typewriter-text">[Aún no has descifrado los textos antiguos...]</p>
+            <div class="action-menu">
+                <a href="{{ url_for('index') }}" class="btn-start">< VOLVER AL INICIO</a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -34,8 +34,11 @@
                 ¿Tienes lo necesario para aprobar y no perecer en el intento?
             </p>
 
-            <div class="action-menu">
-                <a href="#" class="btn-start">> COMENZAR AVENTURA</a>
+            <div class="action-menu" style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
+                <a href="{{ url_for('reglas') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Cámara de las Reglas</a>
+                <a href="{{ url_for('notas') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Oráculo de las Notas</a>
+                <a href="{{ url_for('skills') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Skills a Desbloquear</a>
+                <a href="{{ url_for('tiempo') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Línea del Tiempo</a>
             </div>
         </main>
     </div>
