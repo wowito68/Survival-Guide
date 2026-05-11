@@ -43,6 +43,47 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="flash-container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    {% for category, message in messages %}
+                      <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+            </div>
+
+            {% if not completado %}
+            <div class="quiz-container">
+                <h2>> Desafío de Skills</h2>
+                <form method="POST">
+                    <div class="question">
+                        <p>1. ¿Qué persistencia de datos aprenderás?</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q1" value="a" required> a) MongoDB</label>
+                            <label><input type="radio" name="q1" value="b"> b) Redis</label>
+                            <label><input type="radio" name="q1" value="c"> c) SQLite/Room</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <p>2. ¿Qué reliquia usamos para el Control de Versiones?</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q2" value="a" required> a) Git</label>
+                            <label><input type="radio" name="q2" value="b"> b) SVN</label>
+                            <label><input type="radio" name="q2" value="c"> c) Copiar y pegar carpetas</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">Resolver Acertijo</button>
+                </form>
+            </div>
+            {% else %}
+            <div class="quiz-container">
+                <h2 style="color: #33ff33;">> Nivel Superado</h2>
+                <p>Has dominado el árbol de habilidades.</p>
+            </div>
+            {% endif %}
+
             <div class="action-menu">
                 <a href="{{ url_for('index') }}" class="btn-start">< VOLVER AL INICIO</a>
             </div>

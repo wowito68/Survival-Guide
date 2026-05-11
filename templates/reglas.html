@@ -43,6 +43,47 @@
                     </ul>
                 </div>
             </div>
+            
+            <div class="flash-container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    {% for category, message in messages %}
+                      <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+            </div>
+
+            {% if not completado %}
+            <div class="quiz-container">
+                <h2>> Desafío de la Cámara</h2>
+                <form method="POST">
+                    <div class="question">
+                        <p>1. ¿Cuántas faltas puedes tener como máximo antes de reprobar (suponiendo que son 3 por semana)?</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q1" value="a" required> a) Depende del 85% de asistencia</label>
+                            <label><input type="radio" name="q1" value="b"> b) Ninguna, la asistencia no importa</label>
+                            <label><input type="radio" name="q1" value="c"> c) 10 faltas</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <p>2. ¿A qué equivalen 3 retardos?</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q2" value="a" required> a) A un regaño</label>
+                            <label><input type="radio" name="q2" value="b"> b) A una falta</label>
+                            <label><input type="radio" name="q2" value="c"> c) A puntos extra</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">Resolver Acertijo</button>
+                </form>
+            </div>
+            {% else %}
+            <div class="quiz-container">
+                <h2 style="color: #33ff33;">> Nivel Superado</h2>
+                <p>Ya has dominado las reglas de la cámara. Sigue tu camino.</p>
+            </div>
+            {% endif %}
+
             <div class="action-menu">
                 <a href="{{ url_for('index') }}" class="btn-start">< VOLVER AL INICIO</a>
             </div>

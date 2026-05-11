@@ -43,6 +43,47 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="flash-container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    {% for category, message in messages %}
+                      <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+            </div>
+
+            {% if not completado %}
+            <div class="quiz-container">
+                <h2>> Desafío del Tiempo</h2>
+                <form method="POST">
+                    <div class="question">
+                        <p>1. ¿En qué semana es el Primer Examen Ritual?</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q1" value="a" required> a) Semana 3</label>
+                            <label><input type="radio" name="q1" value="b"> b) Semana 5</label>
+                            <label><input type="radio" name="q1" value="c"> c) Semana 10</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <p>2. ¿Qué ocurre en la Fase 3?</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q2" value="a" required> a) Defensa del Proyecto Final</label>
+                            <label><input type="radio" name="q2" value="b"> b) Selección de clase</label>
+                            <label><input type="radio" name="q2" value="c"> c) Misión de base de datos local</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">Resolver Acertijo</button>
+                </form>
+            </div>
+            {% else %}
+            <div class="quiz-container">
+                <h2 style="color: #33ff33;">> Nivel Superado</h2>
+                <p>Has derrotado al Jefe Final. Eres un verdadero guerrero del código.</p>
+            </div>
+            {% endif %}
+
             <div class="action-menu">
                 <a href="{{ url_for('index') }}" class="btn-start">< VOLVER AL INICIO</a>
             </div>

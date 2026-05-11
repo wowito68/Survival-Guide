@@ -33,12 +33,36 @@
                 temible compilador.
                 ¿Tienes lo necesario para aprobar y no perecer en el intento?
             </p>
+            <div class="flash-container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    {% for category, message in messages %}
+                      <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+            </div>
 
             <div class="action-menu" style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
                 <a href="{{ url_for('reglas') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Cámara de las Reglas</a>
-                <a href="{{ url_for('notas') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Oráculo de las Notas</a>
-                <a href="{{ url_for('skills') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Skills a Desbloquear</a>
-                <a href="{{ url_for('tiempo') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Línea del Tiempo</a>
+                
+                {% if nivel >= 2 %}
+                    <a href="{{ url_for('notas') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Oráculo de las Notas</a>
+                {% else %}
+                    <a href="#" class="btn-start btn-locked" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Oráculo de las Notas [BLOQUEADO]</a>
+                {% endif %}
+
+                {% if nivel >= 3 %}
+                    <a href="{{ url_for('skills') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Skills a Desbloquear</a>
+                {% else %}
+                    <a href="#" class="btn-start btn-locked" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Skills a Desbloquear [BLOQUEADO]</a>
+                {% endif %}
+
+                {% if nivel >= 4 %}
+                    <a href="{{ url_for('tiempo') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Línea del Tiempo</a>
+                {% else %}
+                    <a href="#" class="btn-start btn-locked" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Línea del Tiempo [BLOQUEADO]</a>
+                {% endif %}
             </div>
         </main>
     </div>

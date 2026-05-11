@@ -44,6 +44,47 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="flash-container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    {% for category, message in messages %}
+                      <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+            </div>
+
+            {% if not completado %}
+            <div class="quiz-container">
+                <h2>> Desafío del Oráculo</h2>
+                <form method="POST">
+                    <div class="question">
+                        <p>1. ¿Qué porcentaje del poder total tienen los Proyectos Mayores?</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q1" value="a" required> a) 20%</label>
+                            <label><input type="radio" name="q1" value="b"> b) 40%</label>
+                            <label><input type="radio" name="q1" value="c"> c) 50%</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <p>2. ¿Cuándo ocurre el Proyecto Final (Artefacto Definitivo)?</p>
+                        <div class="radio-group">
+                            <label><input type="radio" name="q2" value="a" required> a) Semana 5</label>
+                            <label><input type="radio" name="q2" value="b"> b) Semana 10</label>
+                            <label><input type="radio" name="q2" value="c"> c) Semana 15</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">Resolver Acertijo</button>
+                </form>
+            </div>
+            {% else %}
+            <div class="quiz-container">
+                <h2 style="color: #33ff33;">> Nivel Superado</h2>
+                <p>El Oráculo ha revelado todos sus secretos.</p>
+            </div>
+            {% endif %}
+
             <div class="action-menu">
                 <a href="{{ url_for('index') }}" class="btn-start">< VOLVER AL INICIO</a>
             </div>
