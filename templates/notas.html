@@ -1,94 +1,73 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oráculo de las Notas</title>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="terminal-container">
-        <header>
-            <h1>>_ Oráculo de las Notas</h1>
-        </header>
-        <main class="narrative">
-            <p>
-                Frente a ti se encuentra el Oráculo. Es capaz de predecir tu futuro académico basándose en tus entregas pasadas. 
-                Muchos valientes han llorado al ver sus resultados.
-            </p>
-            <div class="cards-container">
-                <div class="card">
-                    <h3>> La Balanza del Destino</h3>
-                    <ul>
-                        <li>Proyectos Mayores: 40% del poder total.</li>
-                        <li>Exámenes Rituales: 30% del poder total.</li>
-                        <li>Misiones Menores (Tareas): 20% del poder total.</li>
-                        <li>Asistencia y Participación: 10% del poder total.</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>> Proyectos Mayores</h3>
-                    <ul>
-                        <li>Proyecto 1: Interfaz de Supervivencia (Semana 4)</li>
-                        <li>Proyecto 2: Conexión con el Más Allá (Semana 8)</li>
-                        <li>Proyecto Final: Artefacto Definitivo (Semana 15)</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>> Exámenes Rituales</h3>
-                    <ul>
-                        <li>Primer Ritual: Fundamentos arcanos (Semana 5)</li>
-                        <li>Segundo Ritual: Arquitectura de datos (Semana 10)</li>
-                        <li>Tercer Ritual: Integración total (Semana 16)</li>
-                    </ul>
-                </div>
-            </div>
+{% extends "base.html" %}
 
-            <div class="flash-container">
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                  {% if messages %}
-                    {% for category, message in messages %}
-                      <div class="alert alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                  {% endif %}
-                {% endwith %}
-            </div>
+{% block title %}Oráculo de las Notas{% endblock %}
+{% block header %}>_ Oráculo de las Notas{% endblock %}
 
-            {% if not completado %}
-            <div class="quiz-container">
-                <h2>> Desafío del Oráculo</h2>
-                <form method="POST">
-                    <div class="question">
-                        <p>1. ¿Qué porcentaje del poder total tienen los Proyectos Mayores?</p>
-                        <div class="radio-group">
-                            <label><input type="radio" name="q1" value="a" required> a) 20%</label>
-                            <label><input type="radio" name="q1" value="b"> b) 40%</label>
-                            <label><input type="radio" name="q1" value="c"> c) 50%</label>
-                        </div>
-                    </div>
-                    <div class="question">
-                        <p>2. ¿Cuándo ocurre el Proyecto Final (Artefacto Definitivo)?</p>
-                        <div class="radio-group">
-                            <label><input type="radio" name="q2" value="a" required> a) Semana 5</label>
-                            <label><input type="radio" name="q2" value="b"> b) Semana 10</label>
-                            <label><input type="radio" name="q2" value="c"> c) Semana 15</label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-submit">Resolver Acertijo</button>
-                </form>
-            </div>
-            {% else %}
-            <div class="quiz-container">
-                <h2 style="color: #33ff33;">> Nivel Superado</h2>
-                <p>El Oráculo ha revelado todos sus secretos.</p>
-            </div>
-            {% endif %}
+{% block content %}
+<p>
+    Frente a ti se encuentra el Oráculo. Es capaz de predecir tu futuro académico basándose en tus entregas pasadas. 
+    Muchos valientes han llorado al ver sus resultados.
+</p>
 
-            <div class="action-menu">
-                <a href="{{ url_for('index') }}" class="btn-start">< VOLVER AL INICIO</a>
-            </div>
-        </main>
+<div class="cards-container">
+    <div class="card">
+        <h3>> La Balanza del Destino</h3>
+        <ul>
+            <li>Proyectos Mayores: 40% del poder total.</li>
+            <li>Exámenes Rituales: 30% del poder total.</li>
+            <li>Misiones Menores (Tareas): 20% del poder total.</li>
+            <li>Asistencia y Participación: 10% del poder total.</li>
+        </ul>
     </div>
-</body>
-</html>
+    <div class="card">
+        <h3>> Proyectos Mayores</h3>
+        <ul>
+            <li>Proyecto 1: Interfaz de Supervivencia (Semana 4)</li>
+            <li>Proyecto 2: Conexión con el Más Allá (Semana 8)</li>
+            <li>Proyecto Final: Artefacto Definitivo (Semana 15)</li>
+        </ul>
+    </div>
+    <div class="card">
+        <h3>> Exámenes Rituales</h3>
+        <ul>
+            <li>Primer Ritual: Fundamentos arcanos (Semana 5)</li>
+            <li>Segundo Ritual: Arquitectura de datos (Semana 10)</li>
+            <li>Tercer Ritual: Integración total (Semana 16)</li>
+        </ul>
+    </div>
+</div>
+
+{% if not completado %}
+<div class="quiz-container">
+    <h2>> Desafío del Oráculo</h2>
+    <form method="POST">
+        <div class="question">
+            <p>1. ¿Qué porcentaje del poder total tienen los Proyectos Mayores?</p>
+            <div class="radio-group">
+                <label><input type="radio" name="q1" value="a" required> a) 20%</label>
+                <label><input type="radio" name="q1" value="b"> b) 40%</label>
+                <label><input type="radio" name="q1" value="c"> c) 50%</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>2. ¿Cuándo ocurre el Proyecto Final (Artefacto Definitivo)?</p>
+            <div class="radio-group">
+                <label><input type="radio" name="q2" value="a" required> a) Semana 5</label>
+                <label><input type="radio" name="q2" value="b"> b) Semana 10</label>
+                <label><input type="radio" name="q2" value="c"> c) Semana 15</label>
+            </div>
+        </div>
+        <button type="submit" class="btn-submit">Resolver Acertijo</button>
+    </form>
+</div>
+{% else %}
+<div class="quiz-container">
+    <h2 style="color: var(--text-color);">> Nivel Superado</h2>
+    <p>El Oráculo ha revelado todos sus secretos.</p>
+</div>
+{% endif %}
+
+<div class="action-menu">
+    <a href="{{ url_for('index') }}" class="btn-start">< VOLVER AL INICIO</a>
+</div>
+{% endblock %}

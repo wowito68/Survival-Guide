@@ -1,71 +1,45 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supervivencia: Programación Móvil</title>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+{% block title %}Supervivencia: Programación Móvil{% endblock %}
 
-<body>
-    <div class="terminal-container">
-        <header>
-            <h1>>_ Supervivencia: Programación Móvil</h1>
-        </header>
+{% block header %}>_ Supervivencia: Programación Móvil{% endblock %}
 
-        <main class="narrative">
-            <p class="typewriter-text">
-                [SISTEMA INICIADO...]
-            </p>
-            <p>
-                Te despiertas frente a un monitor parpadeante. Eres un estudiante de nuevo ingreso y acabas de
-                matricularte en "Programación Móvil".
-            </p>
-            <p>
-                A tu alrededor, otros estudiantes murmuran sobre entregas imposibles, errores de compilación crípticos y
-                dispositivos que se niegan a conectar.
-                El semestre apenas comienza, pero el aire está denso con el aroma a café barato y desesperación.
-            </p>
-            <p>
-                Para sobrevivir, tendrás que dominar nuevos lenguajes, entender arquitecturas extrañas y enfrentarte al
-                temible compilador.
-                ¿Tienes lo necesario para aprobar y no perecer en el intento?
-            </p>
-            <div class="flash-container">
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                  {% if messages %}
-                    {% for category, message in messages %}
-                      <div class="alert alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                  {% endif %}
-                {% endwith %}
-            </div>
+{% block content %}
+<p class="typewriter-text">[SISTEMA INICIADO...]</p>
+<p>
+    Te despiertas frente a un monitor parpadeante. Eres un estudiante de nuevo ingreso y acabas de
+    matricularte en "Programación Móvil".
+</p>
+<p>
+    A tu alrededor, otros estudiantes murmuran sobre entregas imposibles, errores de compilación crípticos y
+    dispositivos que se niegan a conectar.
+    El semestre apenas comienza, pero el aire está denso con el aroma a café barato y desesperación.
+</p>
+<p>
+    Para sobrevivir, tendrás que dominar nuevos lenguajes, entender arquitecturas extrañas y enfrentarte al
+    temible compilador.
+    ¿Tienes lo necesario para aprobar y no perecer en el intento?
+</p>
 
-            <div class="action-menu" style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
-                <a href="{{ url_for('reglas') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Cámara de las Reglas</a>
-                
-                {% if nivel >= 2 %}
-                    <a href="{{ url_for('notas') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Oráculo de las Notas</a>
-                {% else %}
-                    <a href="#" class="btn-start btn-locked" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Oráculo de las Notas [BLOQUEADO]</a>
-                {% endif %}
+<div class="action-menu" style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
+    <a href="{{ url_for('reglas') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">📜 Cámara de las Reglas</a>
+    
+    {% if nivel >= 2 %}
+        <a href="{{ url_for('notas') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">🔮 Oráculo de las Notas</a>
+    {% else %}
+        <a href="#" class="btn-start btn-locked" style="width: 80%; max-width: 400px; font-size: 1.5rem;">🔒 Oráculo de las Notas [BLOQUEADO]</a>
+    {% endif %}
 
-                {% if nivel >= 3 %}
-                    <a href="{{ url_for('skills') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Skills a Desbloquear</a>
-                {% else %}
-                    <a href="#" class="btn-start btn-locked" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Skills a Desbloquear [BLOQUEADO]</a>
-                {% endif %}
+    {% if nivel >= 3 %}
+        <a href="{{ url_for('skills') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">⚔️ Skills a Desbloquear</a>
+    {% else %}
+        <a href="#" class="btn-start btn-locked" style="width: 80%; max-width: 400px; font-size: 1.5rem;">🔒 Skills a Desbloquear [BLOQUEADO]</a>
+    {% endif %}
 
-                {% if nivel >= 4 %}
-                    <a href="{{ url_for('tiempo') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Línea del Tiempo</a>
-                {% else %}
-                    <a href="#" class="btn-start btn-locked" style="width: 80%; max-width: 400px; font-size: 1.5rem;">> Línea del Tiempo [BLOQUEADO]</a>
-                {% endif %}
-            </div>
-        </main>
-    </div>
-</body>
-
-</html>
+    {% if nivel >= 4 %}
+        <a href="{{ url_for('tiempo') }}" class="btn-start" style="width: 80%; max-width: 400px; font-size: 1.5rem;">⏳ Línea del Tiempo</a>
+    {% else %}
+        <a href="#" class="btn-start btn-locked" style="width: 80%; max-width: 400px; font-size: 1.5rem;">🔒 Línea del Tiempo [BLOQUEADO]</a>
+    {% endif %}
+</div>
+{% endblock %}

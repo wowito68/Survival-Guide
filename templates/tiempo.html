@@ -1,93 +1,72 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Línea del Tiempo</title>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="terminal-container">
-        <header>
-            <h1>>_ Línea del Tiempo</h1>
-        </header>
-        <main class="narrative">
-            <p>
-                Un pergamino infinito que detalla las fechas de entrega, los exámenes parciales y los temidos proyectos finales. 
-                El reloj no perdona.
-            </p>
-            <div class="cards-container">
-                <div class="card">
-                    <h3>> Fase 1: El Despertar</h3>
-                    <ul>
-                        <li>Semana 1: Selección de clase y gremio (Equipos).</li>
-                        <li>Semana 3: Primera entrega de pergaminos (Bocetos).</li>
-                        <li>Semana 5: Primer Examen Ritual.</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>> Fase 2: La Tormenta</h3>
-                    <ul>
-                        <li>Semana 7: Misión de base de datos local.</li>
-                        <li>Semana 8: Entrega del Proyecto Intermedio.</li>
-                        <li>Semana 10: Segundo Examen Ritual.</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>> Fase 3: El Jefe Final</h3>
-                    <ul>
-                        <li>Semana 12: Integración de APIs externas.</li>
-                        <li>Semana 15: Defensa del Proyecto Final.</li>
-                        <li>Semana 16: Juicio Final (Examen Final).</li>
-                    </ul>
-                </div>
-            </div>
+{% extends "base.html" %}
 
-            <div class="flash-container">
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                  {% if messages %}
-                    {% for category, message in messages %}
-                      <div class="alert alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                  {% endif %}
-                {% endwith %}
-            </div>
+{% block title %}Línea del Tiempo{% endblock %}
+{% block header %}>_ Línea del Tiempo{% endblock %}
 
-            {% if not completado %}
-            <div class="quiz-container">
-                <h2>> Desafío del Tiempo</h2>
-                <form method="POST">
-                    <div class="question">
-                        <p>1. ¿En qué semana es el Primer Examen Ritual?</p>
-                        <div class="radio-group">
-                            <label><input type="radio" name="q1" value="a" required> a) Semana 3</label>
-                            <label><input type="radio" name="q1" value="b"> b) Semana 5</label>
-                            <label><input type="radio" name="q1" value="c"> c) Semana 10</label>
-                        </div>
-                    </div>
-                    <div class="question">
-                        <p>2. ¿Qué ocurre en la Fase 3?</p>
-                        <div class="radio-group">
-                            <label><input type="radio" name="q2" value="a" required> a) Defensa del Proyecto Final</label>
-                            <label><input type="radio" name="q2" value="b"> b) Selección de clase</label>
-                            <label><input type="radio" name="q2" value="c"> c) Misión de base de datos local</label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-submit">Resolver Acertijo</button>
-                </form>
-            </div>
-            {% else %}
-            <div class="quiz-container">
-                <h2 style="color: #33ff33;">> Nivel Superado</h2>
-                <p>Has derrotado al Jefe Final. Eres un verdadero guerrero del código.</p>
-            </div>
-            {% endif %}
+{% block content %}
+<p>
+    Un pergamino infinito que detalla las fechas de entrega, los exámenes parciales y los temidos proyectos finales. 
+    El reloj no perdona.
+</p>
 
-            <div class="action-menu">
-                <a href="{{ url_for('index') }}" class="btn-start">< VOLVER AL INICIO</a>
-            </div>
-        </main>
+<div class="cards-container">
+    <div class="card">
+        <h3>> Fase 1: El Despertar</h3>
+        <ul>
+            <li>Semana 1: Selección de clase y gremio (Equipos).</li>
+            <li>Semana 3: Primera entrega de pergaminos (Bocetos).</li>
+            <li>Semana 5: Primer Examen Ritual.</li>
+        </ul>
     </div>
-</body>
-</html>
+    <div class="card">
+        <h3>> Fase 2: La Tormenta</h3>
+        <ul>
+            <li>Semana 7: Misión de base de datos local.</li>
+            <li>Semana 8: Entrega del Proyecto Intermedio.</li>
+            <li>Semana 10: Segundo Examen Ritual.</li>
+        </ul>
+    </div>
+    <div class="card">
+        <h3>> Fase 3: El Jefe Final</h3>
+        <ul>
+            <li>Semana 12: Integración de APIs externas.</li>
+            <li>Semana 15: Defensa del Proyecto Final.</li>
+            <li>Semana 16: Juicio Final (Examen Final).</li>
+        </ul>
+    </div>
+</div>
+
+{% if not completado %}
+<div class="quiz-container">
+    <h2>> Desafío del Tiempo</h2>
+    <form method="POST">
+        <div class="question">
+            <p>1. ¿En qué semana es el Primer Examen Ritual?</p>
+            <div class="radio-group">
+                <label><input type="radio" name="q1" value="a" required> a) Semana 3</label>
+                <label><input type="radio" name="q1" value="b"> b) Semana 5</label>
+                <label><input type="radio" name="q1" value="c"> c) Semana 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>2. ¿Qué ocurre en la Fase 3?</p>
+            <div class="radio-group">
+                <label><input type="radio" name="q2" value="a" required> a) Defensa del Proyecto Final</label>
+                <label><input type="radio" name="q2" value="b"> b) Selección de clase</label>
+                <label><input type="radio" name="q2" value="c"> c) Misión de base de datos local</label>
+            </div>
+        </div>
+        <button type="submit" class="btn-submit">Resolver Acertijo</button>
+    </form>
+</div>
+{% else %}
+<div class="quiz-container">
+    <h2 style="color: var(--text-color);">> Nivel Superado</h2>
+    <p>Has derrotado al Jefe Final. Eres un verdadero guerrero del código.</p>
+</div>
+{% endif %}
+
+<div class="action-menu">
+    <a href="{{ url_for('index') }}" class="btn-start">< VOLVER AL INICIO</a>
+</div>
+{% endblock %}

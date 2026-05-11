@@ -34,55 +34,59 @@ def index():
 
 @app.route('/reglas', methods=['GET', 'POST'])
 def reglas():
+    nivel_actual = session.get('nivel', 1)
     if request.method == 'POST':
         q1 = request.form.get('q1')
         q2 = request.form.get('q2')
         if q1 == ANSWERS['reglas']['q1'] and q2 == ANSWERS['reglas']['q2']:
             flash('¡Has superado la Cámara de las Reglas! Se ha desbloqueado el Oráculo.', 'success')
-            session['nivel'] = max(session.get('nivel', 1), 2)
+            session['nivel'] = max(nivel_actual, 2)
             return redirect(url_for('index'))
         else:
             flash('Tus respuestas son incorrectas. Revisa los textos antiguos y vuelve a intentarlo.', 'error')
-    return render_template('reglas.html', completado=(session.get('nivel', 1) > 1))
+    return render_template('reglas.html', completado=(nivel_actual > 1), nivel=nivel_actual)
 
 @app.route('/notas', methods=['GET', 'POST'])
 def notas():
+    nivel_actual = session.get('nivel', 1)
     if request.method == 'POST':
         q1 = request.form.get('q1')
         q2 = request.form.get('q2')
         if q1 == ANSWERS['notas']['q1'] and q2 == ANSWERS['notas']['q2']:
             flash('¡Has interpretado las predicciones del Oráculo! Nuevos Skills desbloqueados.', 'success')
-            session['nivel'] = max(session.get('nivel', 1), 3)
+            session['nivel'] = max(nivel_actual, 3)
             return redirect(url_for('index'))
         else:
             flash('Las visiones del Oráculo se nublan. Has fallado.', 'error')
-    return render_template('notas.html', completado=(session.get('nivel', 1) > 2))
+    return render_template('notas.html', completado=(nivel_actual > 2), nivel=nivel_actual)
 
 @app.route('/skills', methods=['GET', 'POST'])
 def skills():
+    nivel_actual = session.get('nivel', 1)
     if request.method == 'POST':
         q1 = request.form.get('q1')
         q2 = request.form.get('q2')
         if q1 == ANSWERS['skills']['q1'] and q2 == ANSWERS['skills']['q2']:
             flash('¡Has asimilado el árbol de habilidades! Solo queda enfrentarte al Tiempo.', 'success')
-            session['nivel'] = max(session.get('nivel', 1), 4)
+            session['nivel'] = max(nivel_actual, 4)
             return redirect(url_for('index'))
         else:
             flash('No estás listo para estos conocimientos. Sigue practicando.', 'error')
-    return render_template('skills.html', completado=(session.get('nivel', 1) > 3))
+    return render_template('skills.html', completado=(nivel_actual > 3), nivel=nivel_actual)
 
 @app.route('/tiempo', methods=['GET', 'POST'])
 def tiempo():
+    nivel_actual = session.get('nivel', 1)
     if request.method == 'POST':
         q1 = request.form.get('q1')
         q2 = request.form.get('q2')
         if q1 == ANSWERS['tiempo']['q1'] and q2 == ANSWERS['tiempo']['q2']:
             flash('¡ENHORABUENA! Has conquistado el Tiempo y estás listo para graduarte.', 'success')
-            session['nivel'] = max(session.get('nivel', 1), 5)
+            session['nivel'] = max(nivel_actual, 5)
             return redirect(url_for('index'))
         else:
             flash('El reloj es implacable. Has perdido la noción del tiempo. Intenta de nuevo.', 'error')
-    return render_template('tiempo.html', completado=(session.get('nivel', 1) > 4))
+    return render_template('tiempo.html', completado=(nivel_actual > 4), nivel=nivel_actual)
 
 if __name__ == '__main__':
     app.run(debug=True)

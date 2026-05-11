@@ -1,93 +1,72 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cámara de las Reglas</title>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="terminal-container">
-        <header>
-            <h1>>_ Cámara de las Reglas</h1>
-        </header>
-        <main class="narrative">
-            <p>
-                Has entrado a la Cámara de las Reglas. Las paredes están grabadas con los mandamientos del desarrollo móvil. 
-                Aquí yace la sabiduría para no reprobar.
-            </p>
-            <div class="cards-container">
-                <div class="card">
-                    <h3>> Asistencia y Supervivencia</h3>
-                    <ul>
-                        <li>Presencia requerida: 85% mínimo para no perecer.</li>
-                        <li>Retardos: 3 tardanzas equivalen a una herida grave (falta).</li>
-                        <li>Justificantes: Solo se aceptan pergaminos sellados por los altos mandos.</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>> Código de Convivencia</h3>
-                    <ul>
-                        <li>Respetar a los compañeros del gremio.</li>
-                        <li>Silenciar dispositivos comunicadores durante la batalla.</li>
-                        <li>El plagio de código es un pecado castigado con la expulsión del calabozo.</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>> Participación en Batalla</h3>
-                    <ul>
-                        <li>Levantar la mano antes de lanzar un hechizo (hablar).</li>
-                        <li>Aportar al gremio con código limpio y comentado.</li>
-                        <li>Colaborar en los asedios grupales (trabajo en equipo).</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="flash-container">
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                  {% if messages %}
-                    {% for category, message in messages %}
-                      <div class="alert alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                  {% endif %}
-                {% endwith %}
-            </div>
+{% extends "base.html" %}
 
-            {% if not completado %}
-            <div class="quiz-container">
-                <h2>> Desafío de la Cámara</h2>
-                <form method="POST">
-                    <div class="question">
-                        <p>1. ¿Cuántas faltas puedes tener como máximo antes de reprobar (suponiendo que son 3 por semana)?</p>
-                        <div class="radio-group">
-                            <label><input type="radio" name="q1" value="a" required> a) Depende del 85% de asistencia</label>
-                            <label><input type="radio" name="q1" value="b"> b) Ninguna, la asistencia no importa</label>
-                            <label><input type="radio" name="q1" value="c"> c) 10 faltas</label>
-                        </div>
-                    </div>
-                    <div class="question">
-                        <p>2. ¿A qué equivalen 3 retardos?</p>
-                        <div class="radio-group">
-                            <label><input type="radio" name="q2" value="a" required> a) A un regaño</label>
-                            <label><input type="radio" name="q2" value="b"> b) A una falta</label>
-                            <label><input type="radio" name="q2" value="c"> c) A puntos extra</label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-submit">Resolver Acertijo</button>
-                </form>
-            </div>
-            {% else %}
-            <div class="quiz-container">
-                <h2 style="color: #33ff33;">> Nivel Superado</h2>
-                <p>Ya has dominado las reglas de la cámara. Sigue tu camino.</p>
-            </div>
-            {% endif %}
+{% block title %}Cámara de las Reglas{% endblock %}
+{% block header %}>_ Cámara de las Reglas{% endblock %}
 
-            <div class="action-menu">
-                <a href="{{ url_for('index') }}" class="btn-start">< VOLVER AL INICIO</a>
-            </div>
-        </main>
+{% block content %}
+<p>
+    Has entrado a la Cámara de las Reglas. Las paredes están grabadas con los mandamientos del desarrollo móvil. 
+    Aquí yace la sabiduría para no reprobar.
+</p>
+
+<div class="cards-container">
+    <div class="card">
+        <h3>> Asistencia y Supervivencia</h3>
+        <ul>
+            <li>Presencia requerida: 85% mínimo para no perecer.</li>
+            <li>Retardos: 3 tardanzas equivalen a una herida grave (falta).</li>
+            <li>Justificantes: Solo se aceptan pergaminos sellados por los altos mandos.</li>
+        </ul>
     </div>
-</body>
-</html>
+    <div class="card">
+        <h3>> Código de Convivencia</h3>
+        <ul>
+            <li>Respetar a los compañeros del gremio.</li>
+            <li>Silenciar dispositivos comunicadores durante la batalla.</li>
+            <li>El plagio de código es un pecado castigado con la expulsión del calabozo.</li>
+        </ul>
+    </div>
+    <div class="card">
+        <h3>> Participación en Batalla</h3>
+        <ul>
+            <li>Levantar la mano antes de lanzar un hechizo (hablar).</li>
+            <li>Aportar al gremio con código limpio y comentado.</li>
+            <li>Colaborar en los asedios grupales (trabajo en equipo).</li>
+        </ul>
+    </div>
+</div>
+
+{% if not completado %}
+<div class="quiz-container">
+    <h2>> Desafío de la Cámara</h2>
+    <form method="POST">
+        <div class="question">
+            <p>1. ¿Cuántas faltas puedes tener como máximo antes de reprobar (suponiendo que son 3 por semana)?</p>
+            <div class="radio-group">
+                <label><input type="radio" name="q1" value="a" required> a) Depende del 85% de asistencia</label>
+                <label><input type="radio" name="q1" value="b"> b) Ninguna, la asistencia no importa</label>
+                <label><input type="radio" name="q1" value="c"> c) 10 faltas</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>2. ¿A qué equivalen 3 retardos?</p>
+            <div class="radio-group">
+                <label><input type="radio" name="q2" value="a" required> a) A un regaño</label>
+                <label><input type="radio" name="q2" value="b"> b) A una falta</label>
+                <label><input type="radio" name="q2" value="c"> c) A puntos extra</label>
+            </div>
+        </div>
+        <button type="submit" class="btn-submit">Resolver Acertijo</button>
+    </form>
+</div>
+{% else %}
+<div class="quiz-container">
+    <h2 style="color: var(--text-color);">> Nivel Superado</h2>
+    <p>Ya has dominado las reglas de la cámara. Sigue tu camino.</p>
+</div>
+{% endif %}
+
+<div class="action-menu">
+    <a href="{{ url_for('index') }}" class="btn-start">< VOLVER AL INICIO</a>
+</div>
+{% endblock %}

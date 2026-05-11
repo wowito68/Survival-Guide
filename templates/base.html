@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Supervivencia: Programación Móvil{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="fade-in">
+    <!-- Barra de progreso general de la aventura -->
+    <div class="progress-container">
+        <div class="progress-bar" style="width: {{ (nivel - 1) * 25 }}%;"></div>
+        <div class="progress-text">Nivel {{ nivel }} de 5</div>
+    </div>
+
+    <div class="terminal-container">
+        <header>
+            <h1>{% block header %}>_ Aventura Base{% endblock %}</h1>
+        </header>
+
+        <main class="narrative">
+            <div class="flash-container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    {% for category, message in messages %}
+                      <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+            </div>
+
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+</body>
+</html>
